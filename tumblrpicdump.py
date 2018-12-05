@@ -55,7 +55,7 @@ class TmblrPix():
         charset = response.headers.get_content_charset()
         if charset==None:
             charset = "utf-8"
-        get_data = response.read().decode('utf-8')
+        get_data = response.read().decode('utf-8',"ignore")
         get_total_num = self.get_element_one('total="','"',get_data)
         return get_total_num
 
@@ -65,7 +65,7 @@ class TmblrPix():
         tumblr_site = tumblr_site.replace("#start#",str(start))
         req = urllib.request.Request(tumblr_site, None, self.headers)
         response = urllib.request.urlopen(req)
-        get_data = response.read().decode('utf-8')
+        get_data = response.read().decode('utf-8',"ignore")
         get_regex = '<photo-url max-width="1280">(.+?)</photo-url>'
         url_list = re.findall(get_regex,str(get_data))
         return url_list
